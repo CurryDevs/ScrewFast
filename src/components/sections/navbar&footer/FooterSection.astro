@@ -1,0 +1,104 @@
+---
+import FooterSocialLink from "@components/ui/links/FooterSocialLink.astro";
+import EmailFooterInput from "@components/ui/forms/input/EmailFooterInput.astro";
+import enStrings from "@utils/navigation.ts";
+import frStrings from "@utils/fr/navigation.ts";
+import Icon from "@components/ui/icons/Icon.astro";
+import BrandLogo from "@components/BrandLogo.astro";
+import { SITE } from "@data/constants";
+
+const strings = Astro.currentLocale === "fr" ? frStrings : enStrings;
+const sectionThreeTitle = Astro.currentLocale === "fr" ? "Rester à jour" : "Stay up to date";
+const sectionThreeContent = Astro.currentLocale === "fr"
+  ? "Restez informé des derniers outils et des offres exclusives."
+  : "Stay updated with the latest tools and exclusive deals.";
+const crafted = Astro.currentLocale === "fr" ? "Fabriqué par" : "Crafted by";
+const agency = "CurryDevs";
+---
+
+<footer class="relative z-10 w-full bg-gradient-to-tr from-[#0f0c29] via-[#302b63] to-[#24243e] text-neutral-200 overflow-hidden">
+  <div class="mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
+    <!-- Top Grid Section -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-12 animate-fade-in-up motion-safe:transition-all motion-safe:duration-1000">
+
+      <!-- Brand Section -->
+      <div class="col-span-full lg:col-span-2 space-y-5">
+        <BrandLogo class="w-44 h-auto transition-transform duration-300 hover:scale-110 motion-safe:animate-fade-in-up" />
+        <p class="text-neutral-300 text-base leading-relaxed max-w-sm">
+          CurryDevs — empowering brands with cutting-edge digital experiences, design, and development services that scale.
+        </p>
+      </div>
+
+      <!-- Navigation Sections -->
+      {strings.footerLinks.map((section) => (
+        <div class="space-y-3">
+          <h3 class="text-white text-lg font-bold uppercase tracking-wide relative after:block after:w-8 after:h-0.5 after:mt-2 after:bg-gradient-to-r after:from-yellow-400 after:to-orange-500">
+            {section.section}
+          </h3>
+          <ul class="space-y-1">
+            {section.links.map((link, idx) => (
+              <li>
+                <a
+                  href={link.url}
+                  class="block text-neutral-400 text-sm transition duration-300 hover:text-yellow-300 hover:translate-x-1"
+                >
+                  {link.name}
+                </a>
+                {section.section === "Company" && idx === 2 ? (
+                  <span class="ml-2 inline-block bg-yellow-500 text-black text-xs font-bold px-2 py-0.5 rounded animate-bounce">
+                    We're hiring!
+                  </span>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      <!-- Newsletter Section -->
+      <div class="col-span-full md:col-span-2 lg:col-span-2 space-y-4">
+        <h3 class="text-white text-lg font-semibold">{sectionThreeTitle}</h3>
+        <form class="space-y-4 motion-safe:animate-fade-in-up">
+          <EmailFooterInput />
+          <p class="text-sm text-neutral-300">{sectionThreeContent}</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="mt-16 pt-6 border-t border-neutral-700 flex flex-col sm:flex-row items-center justify-between gap-6 motion-safe:animate-fade-in">
+      <!-- Left Copyright -->
+      <p class="text-sm text-neutral-400 text-center sm:text-left">
+        © <span id="current-year"></span> {agency}. {crafted}
+        <a
+          href="https://www.currydevs.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-yellow-400 underline decoration-wavy hover:decoration-solid hover:text-orange-400 transition duration-300"
+        >
+          CurryDevs
+        </a>.
+      </p>
+
+      <!-- Social Media Icons -->
+      <div class="flex gap-4">
+        {Object.entries(strings.socialLinks).map(([key, url]) => (
+          <FooterSocialLink url={url}>
+            <Icon name={`${key}Footer`} class="text-yellow-400 hover:text-orange-400 transition duration-300 transform hover:-translate-y-1 motion-safe:animate-fade-in-up" />
+          </FooterSocialLink>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Glows -->
+  <div class="absolute bottom-0 right-0 w-60 h-60 bg-pink-500 opacity-10 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+  <div class="absolute top-0 left-0 w-60 h-60 bg-indigo-500 opacity-10 rounded-full blur-3xl pointer-events-none animate-pulse delay-500"></div>
+
+  <script>
+    (function(){
+      const el = document.getElementById("current-year");
+      if (el) el.innerText = new Date().getFullYear().toString();
+    })();
+  </script>
+</footer>

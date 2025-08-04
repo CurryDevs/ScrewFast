@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import Icon from "../../ui/icons/Icon.astro";
+
+const { content, author, role, avatarSrc } = Astro.props;
+
+interface Props {
+  content: string;
+  author: string;
+  role: string;
+  avatarSrc: string;
+}
+---
+
+<blockquote
+  class="relative overflow-hidden rounded-2xl border border-white/20 bg-white/40 p-6 shadow-md backdrop-blur-md transition-all duration-300 hover:shadow-xl dark:border-neutral-700/30 dark:bg-neutral-800/40"
+>
+  <!-- Quotation Icon -->
+  <div class="absolute -top-4 -left-4 z-0 opacity-10">
+    <Icon name="quotation" class="h-24 w-24 text-neutral-400 dark:text-neutral-600" />
+  </div>
+
+  <!-- Testimonial Content -->
+  <div class="relative z-10 space-y-4 animate-fade-in-up">
+    <p class="text-lg font-medium italic text-neutral-800 dark:text-neutral-200">
+      “{content}”
+    </p>
+
+    <div class="mt-4 flex items-center gap-4">
+      <Image
+        class="h-10 w-10 shrink-0 rounded-full border border-neutral-300 object-cover dark:border-neutral-600"
+        src={avatarSrc}
+        alt={`Avatar of ${author}`}
+        loading="eager"
+        inferSize
+      />
+      <div>
+        <div class="text-sm font-semibold text-neutral-800 dark:text-white">
+          {author}
+        </div>
+        <div class="text-xs text-neutral-600 dark:text-neutral-400">{role}</div>
+      </div>
+    </div>
+  </div>
+</blockquote>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s ease-out both;
+  }
+</style>
