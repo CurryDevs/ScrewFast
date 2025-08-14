@@ -5,60 +5,69 @@ import enStrings from "@utils/navigation.ts";
 import frStrings from "@utils/fr/navigation.ts";
 import Icon from "@components/ui/icons/Icon.astro";
 import BrandLogo from "@components/BrandLogo.astro";
-import { SITE } from "@data/constants";
 
 const strings = Astro.currentLocale === "fr" ? frStrings : enStrings;
-const sectionThreeTitle = Astro.currentLocale === "fr" ? "Rester à jour" : "Stay up to date";
-const sectionThreeContent = Astro.currentLocale === "fr"
-  ? "Restez informé des derniers outils et des offres exclusives."
-  : "Stay updated with the latest tools and exclusive deals.";
+const sectionThreeTitle =
+  Astro.currentLocale === "fr" ? "Rester à jour" : "Stay up to date";
+const sectionThreeContent =
+  Astro.currentLocale === "fr"
+    ? "Restez informé des derniers outils et des offres exclusives."
+    : "Stay updated with the latest tools and exclusive deals.";
 const crafted = Astro.currentLocale === "fr" ? "Fabriqué par" : "Crafted by";
 const agency = "CurryDevs";
 ---
 
-<footer class="relative z-10 w-full bg-gradient-to-tr from-[#0f0c29] via-[#302b63] to-[#24243e] text-neutral-200 overflow-hidden">
+<footer
+  class="relative z-10 w-full overflow-hidden bg-gradient-to-tr from-[#0f0c29] via-[#302b63] to-[#24243e] text-neutral-200"
+>
   <div class="mx-auto max-w-7xl px-6 py-24 sm:px-8 lg:px-12">
     <!-- Top Grid Section -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-12 animate-fade-in-up motion-safe:transition-all motion-safe:duration-1000">
-
+    <div
+      class="animate-fade-in-up grid grid-cols-1 gap-12 motion-safe:transition-all motion-safe:duration-1000 sm:grid-cols-2 lg:grid-cols-6"
+    >
       <!-- Brand Section -->
-      <div class="col-span-full lg:col-span-2 space-y-5">
-        <BrandLogo class="w-44 h-auto transition-transform duration-300 hover:scale-110 motion-safe:animate-fade-in-up" />
-        <p class="text-neutral-300 text-base leading-relaxed max-w-sm">
-          CurryDevs — empowering brands with cutting-edge digital experiences, design, and development services that scale.
+      <div class="col-span-full space-y-5 lg:col-span-2">
+        <BrandLogo
+          class="motion-safe:animate-fade-in-up h-auto w-44 transition-transform duration-300 hover:scale-110"
+        />
+        <p class="max-w-sm text-base leading-relaxed text-neutral-300">
+          CurryDevs — empowering brands with cutting-edge digital experiences,
+          design, and development services that scale.
         </p>
       </div>
 
       <!-- Navigation Sections -->
-      {strings.footerLinks.map((section) => (
-        <div class="space-y-3">
-          <h3 class="text-white text-lg font-bold uppercase tracking-wide relative after:block after:w-8 after:h-0.5 after:mt-2 after:bg-gradient-to-r after:from-yellow-400 after:to-orange-500">
-            {section.section}
-          </h3>
-          <ul class="space-y-1">
-            {section.links.map((link, idx) => (
-              <li>
-                <a
-                  href={link.url}
-                  class="block text-neutral-400 text-sm transition duration-300 hover:text-yellow-300 hover:translate-x-1"
-                >
-                  {link.name}
-                </a>
-                {section.section === "Company" && idx === 2 ? (
-                  <span class="ml-2 inline-block bg-yellow-500 text-black text-xs font-bold px-2 py-0.5 rounded animate-bounce">
-                    We're hiring!
-                  </span>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {
+        strings.footerLinks.map((section) => (
+          <div class="space-y-3">
+            <h3 class="relative text-lg font-bold tracking-wide text-white uppercase after:mt-2 after:block after:h-0.5 after:w-8 after:bg-gradient-to-r after:from-red-500 after:to-purple-600">
+              {section.section}
+            </h3>
+            <ul class="space-y-1">
+              {section.links.map((link, idx) => (
+                <li>
+                  <a
+                    href={link.url}
+                    class="block text-sm text-neutral-400 transition duration-300 hover:translate-x-1 hover:text-red-400"
+                  >
+                    {link.name}
+                  </a>
+                  {section.section === "Company" && idx === 2 ? (
+                    <span class="ml-2 inline-block animate-bounce rounded bg-gradient-to-r from-red-500 to-purple-600 px-2 py-0.5 text-xs font-bold text-white">
+                      We're hiring!
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
 
       <!-- Newsletter Section -->
-      <div class="col-span-full md:col-span-2 lg:col-span-2 space-y-4">
-        <h3 class="text-white text-lg font-semibold">{sectionThreeTitle}</h3>
-        <form class="space-y-4 motion-safe:animate-fade-in-up">
+      <div class="col-span-full space-y-4 md:col-span-2 lg:col-span-2">
+        <h3 class="text-lg font-semibold text-white">{sectionThreeTitle}</h3>
+        <form class="motion-safe:animate-fade-in-up space-y-4">
           <EmailFooterInput />
           <p class="text-sm text-neutral-300">{sectionThreeContent}</p>
         </form>
@@ -66,15 +75,18 @@ const agency = "CurryDevs";
     </div>
 
     <!-- Divider -->
-    <div class="mt-16 pt-6 border-t border-neutral-700 flex flex-col sm:flex-row items-center justify-between gap-6 motion-safe:animate-fade-in">
+    <div
+      class="motion-safe:animate-fade-in mt-16 flex flex-col items-center justify-between gap-6 border-t border-neutral-700 pt-6 sm:flex-row"
+    >
       <!-- Left Copyright -->
-      <p class="text-sm text-neutral-400 text-center sm:text-left">
-        © <span id="current-year"></span> {agency}. {crafted}
+      <p class="text-center text-sm text-neutral-400 sm:text-left">
+        © <span id="current-year"></span>
+        {agency}. {crafted}
         <a
           href="https://www.currydevs.com/"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-yellow-400 underline decoration-wavy hover:decoration-solid hover:text-orange-400 transition duration-300"
+          class="text-red-400 underline decoration-wavy transition duration-300 hover:text-purple-400 hover:decoration-solid"
         >
           CurryDevs
         </a>.
@@ -82,21 +94,32 @@ const agency = "CurryDevs";
 
       <!-- Social Media Icons -->
       <div class="flex gap-4">
-        {Object.entries(strings.socialLinks).map(([key, url]) => (
-          <FooterSocialLink url={url}>
-            <Icon name={`${key}Footer`} class="text-yellow-400 hover:text-orange-400 transition duration-300 transform hover:-translate-y-1 motion-safe:animate-fade-in-up" />
-          </FooterSocialLink>
-        ))}
+        {
+          Object.entries(strings.socialLinks).map(([key, url]) => (
+            <FooterSocialLink url={url}>
+              <Icon
+                name={`${key}Footer`}
+                class="motion-safe:animate-fade-in-up transform text-red-400 transition duration-300 hover:-translate-y-1 hover:text-purple-400"
+              />
+            </FooterSocialLink>
+          ))
+        }
       </div>
     </div>
   </div>
 
   <!-- Decorative Glows -->
-  <div class="absolute bottom-0 right-0 w-60 h-60 bg-pink-500 opacity-10 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
-  <div class="absolute top-0 left-0 w-60 h-60 bg-indigo-500 opacity-10 rounded-full blur-3xl pointer-events-none animate-pulse delay-500"></div>
+  <div
+    class="pointer-events-none absolute right-0 bottom-0 h-60 w-60 animate-pulse rounded-full bg-red-500 opacity-10 blur-3xl"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute top-0 left-0 h-60 w-60 animate-pulse rounded-full bg-purple-500 opacity-10 blur-3xl delay-500"
+  >
+  </div>
 
   <script>
-    (function(){
+    (function () {
       const el = document.getElementById("current-year");
       if (el) el.innerText = new Date().getFullYear().toString();
     })();

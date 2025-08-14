@@ -22,56 +22,198 @@ const { title, subTitle, src, alt, features } = Astro.props;
 ---
 
 <section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  class="relative mx-auto max-w-[85rem] overflow-hidden px-4 py-16 sm:px-6 lg:px-8 lg:py-20 2xl:max-w-full"
 >
+  <!-- Background Elements -->
+  <div class="absolute inset-0 -z-10">
+    <!-- Animated gradient mesh -->
+    <div class="absolute inset-0 bg-gradient-to-br from-red-50/20 via-transparent to-purple-50/20 dark:from-red-950/10 dark:to-purple-950/10"></div>
+    
+    <!-- Floating geometric shapes -->
+    <div class="absolute top-20 left-10 h-20 w-20 animate-float rounded-full bg-gradient-to-br from-red-200/30 to-purple-200/30 blur-xl dark:from-red-800/20 dark:to-purple-800/20"></div>
+    <div class="absolute bottom-20 right-10 h-32 w-32 animate-float-delayed rounded-full bg-gradient-to-br from-purple-200/30 to-blue-200/30 blur-xl dark:from-purple-800/20 dark:to-blue-800/20"></div>
+    
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(239,68,68,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.03)_1px,transparent_1px)] bg-[size:50px_50px] dark:bg-[linear-gradient(rgba(239,68,68,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.02)_1px,transparent_1px)]"></div>
+  </div>
+
   <!-- Block to display the feature image -->
-  <div class="relative mb-6 overflow-hidden md:mb-8">
+  <div class="animate-fade-in-up relative mb-12 overflow-hidden rounded-2xl shadow-2xl md:mb-16" style="animation-delay: 0.1s">
     {
       src && alt && (
-        <Image
-          src={src}
-          alt={alt}
-          class="h-full w-full object-cover object-center"
-          draggable={"false"}
-          format={"avif"}
-          loading={"eager"}
-        />
+        <div class="group relative">
+          <Image
+            src={src}
+            alt={alt}
+            class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            draggable={"false"}
+            format={"avif"}
+            loading={"eager"}
+          />
+          <!-- Image overlay with gradient -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+          
+          <!-- Floating badge -->
+          <div class="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-neutral-800 shadow-lg backdrop-blur-sm dark:bg-neutral-800/90 dark:text-neutral-200">
+            <span class="flex items-center gap-1">
+              <div class="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
+              Live Demo
+            </span>
+          </div>
+        </div>
       )
     }
   </div>
 
   <!-- Displaying the main content consisting of title, subtitle, and several `IconBlock` components -->
-  <div class="mt-5 grid gap-8 lg:mt-16 lg:grid-cols-3 lg:gap-12">
+  <div class="mt-8 grid gap-12 lg:mt-20 lg:grid-cols-3 lg:gap-16">
     <!-- Block for title and subtitle -->
-    <div class="lg:col-span-1">
+    <div class="animate-fade-in-up lg:col-span-1" style="animation-delay: 0.2s">
+      <!-- Progress indicator -->
+      <div class="mb-6 flex items-center gap-2">
+        <div class="h-1 w-12 rounded-full bg-gradient-to-r from-red-500 to-purple-600"></div>
+        <span class="text-sm font-medium text-red-600 dark:text-red-400">Industry Solutions</span>
+      </div>
+
       <!-- Rendering title -->
       <h2
-        class="text-balance text-2xl font-bold text-neutral-800 dark:text-neutral-200 md:text-3xl"
+        class="text-balance text-3xl font-bold text-neutral-800 dark:text-neutral-200 md:text-4xl lg:text-5xl"
       >
         {title}
       </h2>
+      
       <!-- Rendering subtitle -->
       {
         subTitle && (
-          <p class="mt-2 text-pretty text-neutral-600 dark:text-neutral-400 md:mt-4">
+          <p class="mt-4 text-pretty text-lg leading-relaxed text-neutral-600 dark:text-neutral-400 md:mt-6">
             {subTitle}
           </p>
         )
       }
+
+      <!-- Call-to-action -->
+      <div class="mt-8">
+        <a 
+          href="/services" 
+          class="group inline-flex items-center gap-2 text-red-600 font-semibold hover:text-purple-600 transition-colors duration-300 dark:text-red-400 dark:hover:text-purple-400"
+        >
+          Learn more about our solutions
+          <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
     </div>
 
     <!-- Block to display the IconBlock components -->
-    <div class="lg:col-span-2">
+    <div class="animate-fade-in-up lg:col-span-2" style="animation-delay: 0.3s">
       <div class="grid gap-8 sm:grid-cols-2 md:gap-12">
         <!-- Injecting IconBlock components with different properties -->
         { features &&
-          features.map((feature) => (
-            <IconBlock heading={feature.heading} content={feature.content}>
-              <Icon name={feature.svg} />
-            </IconBlock>
+          features.map((feature, index) => (
+            <div 
+              class="animate-fade-in-up group relative"
+              style={`animation-delay: ${0.4 + index * 0.1}s`}
+            >
+              <!-- Background card -->
+              <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/50 to-white/30 opacity-0 shadow-lg backdrop-blur-sm transition-all duration-500 group-hover:opacity-100 dark:from-neutral-800/50 dark:to-neutral-800/30"></div>
+              
+              <!-- Content -->
+              <div class="relative p-6 transition-transform duration-300 group-hover:-translate-y-1">
+                <IconBlock heading={feature.heading} content={feature.content}>
+                  <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-purple-600 text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                    <Icon name={feature.svg} />
+                  </div>
+                </IconBlock>
+              </div>
+
+              <!-- Hover indicator -->
+              <div class="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-gradient-to-r from-red-500 to-purple-600 opacity-0 transition-all duration-300 group-hover:opacity-100"></div>
+            </div>
           ))
         }
       </div>
     </div>
   </div>
+
+  <!-- Bottom stats section -->
+  <div class="animate-fade-in-up mt-16 lg:mt-24" style="animation-delay: 0.8s">
+    <div class="rounded-2xl bg-gradient-to-r from-red-500/10 via-purple-500/10 to-blue-500/10 p-8 backdrop-blur-sm dark:from-red-900/20 dark:via-purple-900/20 dark:to-blue-900/20">
+      <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-red-600 dark:text-red-400">98%</div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Success Rate</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">24/7</div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Support</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">1000+</div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Projects</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl font-bold text-red-600 dark:text-red-400">5★</div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400">Rating</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 8s ease-in-out infinite;
+  }
+
+  /* Ensure smooth animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-float,
+    .animate-float-delayed {
+      animation: none;
+    }
+    
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

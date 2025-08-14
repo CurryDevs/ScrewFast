@@ -17,33 +17,169 @@ interface Props {
 ---
 
 <section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  class="relative mx-auto max-w-[85rem] overflow-hidden px-4 py-16 sm:px-6 lg:px-8 lg:py-20 2xl:max-w-full"
 >
+  <!-- Background Elements -->
+  <div class="absolute inset-0 -z-10">
+    <!-- Animated gradient background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-red-50/30 via-purple-50/20 to-blue-50/30 dark:from-red-950/10 dark:via-purple-950/10 dark:to-blue-950/10"></div>
+    
+    <!-- Floating particles -->
+    <div class="absolute top-10 left-10 h-2 w-2 animate-bounce rounded-full bg-red-400/40 delay-0"></div>
+    <div class="absolute top-20 right-20 h-3 w-3 animate-bounce rounded-full bg-purple-400/40 delay-300"></div>
+    <div class="absolute bottom-20 left-20 h-2 w-2 animate-bounce rounded-full bg-blue-400/40 delay-700"></div>
+    <div class="absolute bottom-10 right-10 h-3 w-3 animate-bounce rounded-full bg-red-400/40 delay-1000"></div>
+    
+    <!-- Animated lines -->
+    <div class="absolute top-0 left-1/4 h-full w-px bg-gradient-to-b from-transparent via-red-200/30 to-transparent dark:via-red-800/30"></div>
+    <div class="absolute top-0 right-1/4 h-full w-px bg-gradient-to-b from-transparent via-purple-200/30 to-transparent dark:via-purple-800/30"></div>
+  </div>
+
   <!-- Title and description -->
-  <div class="mx-auto mb-6 w-full space-y-1 text-center sm:w-1/2 lg:w-1/3">
+  <div class="mx-auto mb-12 w-full space-y-4 text-center sm:w-2/3 lg:w-1/2">
+    <!-- Badge -->
+    <div class="mx-auto mb-4 w-fit">
+      <span class="inline-flex items-center gap-x-1.5 rounded-full bg-gradient-to-r from-red-100 to-purple-100 px-3 py-1.5 text-xs font-semibold text-red-800 dark:from-red-900/30 dark:to-purple-900/30 dark:text-red-300">
+        <svg class="h-3 w-3 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        Trusted Worldwide
+      </span>
+    </div>
+
     <h2
-      class="text-balance text-2xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl"
+      class="animate-fade-in-up text-balance text-3xl font-bold leading-tight text-neutral-800 dark:text-neutral-200 sm:text-4xl lg:text-5xl"
+      style="animation-delay: 0.1s"
     >
       {title}
     </h2>
     {
       subTitle && (
-        <p class="text-pretty leading-tight text-neutral-600 dark:text-neutral-400">
+        <p class="animate-fade-in-up text-pretty text-lg leading-relaxed text-neutral-600 dark:text-neutral-400" style="animation-delay: 0.2s">
           {subTitle}
         </p>
       )
     }
+    
+    <!-- Stats -->
+    <div class="animate-fade-in-up mt-8 flex justify-center gap-8" style="animation-delay: 0.3s">
+      <div class="text-center">
+        <div class="text-2xl font-bold text-red-600 dark:text-red-400">500+</div>
+        <div class="text-sm text-neutral-600 dark:text-neutral-400">Companies</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">50+</div>
+        <div class="text-sm text-neutral-600 dark:text-neutral-400">Countries</div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">99%</div>
+        <div class="text-sm text-neutral-600 dark:text-neutral-400">Satisfaction</div>
+      </div>
+    </div>
   </div>
-  <div
-    class="flex flex-col items-center justify-center gap-y-2 sm:flex-row sm:gap-x-12 sm:gap-y-0 lg:gap-x-24"
-  >
-    <!-- Clients Group SVGs -->
-    {
-      partners.map((partner) => (
-        <a href={partner.href} target="_blank" rel="noopener noreferrer">
-              <div set:html={partner.icon} />
-        </a>
-      ))
-    }
+
+  <!-- Partners Grid -->
+  <div class="animate-fade-in-up" style="animation-delay: 0.4s">
+    <!-- Desktop View -->
+    <div class="hidden sm:block">
+      <div class="flex flex-wrap items-center justify-center gap-8 lg:gap-12">
+        {
+          partners.map((partner, index) => (
+            <div 
+              class="group relative animate-fade-in-up transition-all duration-500 hover:scale-110"
+              style={`animation-delay: ${0.5 + index * 0.1}s`}
+            >
+              <a 
+                href={partner.href} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="block rounded-xl bg-white/50 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-white/80 hover:shadow-xl dark:bg-neutral-800/50 dark:hover:bg-neutral-800/80"
+              >
+                <div class="grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:brightness-110" set:html={partner.icon} />
+                
+                <!-- Hover effect overlay -->
+                <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500/0 to-purple-500/0 opacity-0 transition-all duration-300 group-hover:from-red-500/5 group-hover:to-purple-500/5 group-hover:opacity-100"></div>
+              </a>
+              
+              <!-- Floating badge on hover -->
+              <div class="absolute -top-2 -right-2 opacity-0 transition-all duration-300 group-hover:opacity-100">
+                <div class="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-purple-600 text-xs text-white shadow-lg">
+                  ✓
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Mobile Carousel -->
+    <div class="sm:hidden">
+      <div class="flex animate-scroll gap-6 overflow-hidden">
+        {
+          [...partners, ...partners].map((partner, index) => (
+            <div class="flex-shrink-0">
+              <a 
+                href={partner.href} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="block rounded-lg bg-white/50 p-4 shadow-md backdrop-blur-sm dark:bg-neutral-800/50"
+              >
+                <div class="grayscale" set:html={partner.icon} />
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom decorative element -->
+  <div class="animate-fade-in-up mt-12 flex justify-center" style="animation-delay: 0.8s">
+    <div class="h-1 w-24 rounded-full bg-gradient-to-r from-red-500 via-purple-500 to-blue-500"></div>
   </div>
 </section>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+  }
+
+  /* Ensure smooth animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-scroll,
+    .animate-bounce {
+      animation: none;
+    }
+    
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

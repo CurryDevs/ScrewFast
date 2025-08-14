@@ -22,7 +22,7 @@ const formSubTitle: string =
   <div class="mx-auto max-w-2xl lg:max-w-5xl">
     <div class="text-center">
       <h1
-        class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
+        class="text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200"
       >
         {title}
       </h1>
@@ -80,26 +80,20 @@ const formSubTitle: string =
         <ContactIconBlock
           heading="Base de connaissances"
           content="Parcourez tous nos articles de base de connaissances."
-          isLinkVisible={true}
-          linkTitle="Visiter les guides et tutoriels"
-          linkURL="#"
-          isArrowVisible={true}
+          isLinkVisible={false}
           ><Icon name="question" />
         </ContactIconBlock>
 
         <ContactIconBlock
           heading="FAQ"
           content="Explorez notre FAQ pour des réponses rapides et claires aux questions courantes."
-          isLinkVisible={true}
-          linkTitle="Visiter la FAQ"
-          linkURL="#"
-          isArrowVisible={true}
+          isLinkVisible={false}
           ><Icon name="chatBubble" />
         </ContactIconBlock>
 
         <ContactIconBlock
           heading="Visitez notre bureau"
-          content="ScrewFast UK"
+          content="Torque Craft UK"
           isAddressVisible={true}
           addressContent="72 Union Terrace, E10 4PE London"
           ><Icon name="mapPin" />
@@ -108,9 +102,8 @@ const formSubTitle: string =
         <ContactIconBlock
           heading="Contactez-nous par e-mail"
           content="Préférez-vous le texte écrit ? Envoyez-nous un e-mail à"
-          isLinkVisible={true}
-          linkTitle="support@screwfast.uk"
-          linkURL="#"
+          isLinkVisible={false}
+          linkTitle="support@torquecraft.uk"
           ><Icon name="envelopeOpen" />
         </ContactIconBlock>
       </div>

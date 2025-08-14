@@ -1,6 +1,6 @@
 ---
 title: "L'impact des pratiques durables"
-description: "Découvrez comment ScrewFast mène la charge en promouvant la durabilité dans l'industrie de la construction"
+description: "Découvrez comment Torque Craft mène la charge en promouvant la durabilité dans l'industrie de la construction"
 cardImage: "@/images/insights/insight-3.avif"
 cardImageAlt: "Vue de dessus de l'agencement des outils mécaniques"
 ---

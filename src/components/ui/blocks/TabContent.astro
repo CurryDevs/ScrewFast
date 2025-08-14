@@ -16,12 +16,12 @@ interface Props {
 }
 // Set class based on 'first' property
 // If 'first' is present, show the tab content immediately
-const firstClass = first ? "" : "hidden";
+const firstClass = first ? "animate-fade-in" : "hidden";
 // Set class based on 'second' property
 // If 'second' is present, use an alternate style for the image
 const secondClass = second
-  ? "shadow-xl aspect-5/4 bg-neutral-300 dark:bg-neutral-600 object-cover p-3 lg:aspect-auto shadow-neutral-200 rounded-xl dark:shadow-neutral-900/[.2]"
-  : "shadow-xl aspect-3/2 object-cover lg:aspect-auto shadow-neutral-200 rounded-xl dark:shadow-neutral-900/[.2]";
+  ? "aspect-5/4 object-cover p-4 lg:aspect-auto bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-700 dark:to-neutral-600 rounded-2xl shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl"
+  : "aspect-3/2 object-cover lg:aspect-auto rounded-2xl shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl";
 
 /*
 first: This property should be set to true for the initial TabContent component
@@ -42,13 +42,96 @@ This is the full example:
 
 <!-- Container for tab content that controls visibility and accessibility -->
 <div id={id} role="tabpanel" class={firstClass} aria-labelledby={aria}>
-  <!-- Astro Image component to display the image with dynamic classes based on the 'second' property -->
-  <Image
-    src={src}
-    alt={alt}
-    class={secondClass}
-    draggable={"false"}
-    format={"avif"}
-    loading={"eager"}
-  />
+  <div class="group relative overflow-hidden rounded-2xl">
+    <!-- Background glow effect -->
+    <div
+      class="absolute -inset-4 rounded-2xl bg-gradient-to-r from-red-500/20 via-purple-500/20 to-blue-500/20 opacity-0 blur-xl transition-all duration-700 group-hover:opacity-100"
+    >
+    </div>
+
+    <!-- Main image container -->
+    <div class="relative">
+      <!-- Astro Image component to display the image with dynamic classes based on the 'second' property -->
+      <Image
+        src={src}
+        alt={alt}
+        class={secondClass}
+        draggable={"false"}
+        format={"avif"}
+        loading={"eager"}
+      />
+
+      <!-- Image overlay with gradient -->
+      <div
+        class="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      >
+      </div>
+
+      <!-- Interactive elements overlay -->
+      <div
+        class="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100"
+      >
+        <div
+          class="rounded-full bg-white/90 p-3 shadow-lg backdrop-blur-sm dark:bg-neutral-800/90"
+        >
+          <svg
+            class="h-6 w-6 text-red-600 dark:text-red-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative corner elements -->
+    <div
+      class="absolute top-4 right-4 h-3 w-3 rounded-full bg-gradient-to-r from-red-500 to-purple-600 opacity-60"
+    >
+    </div>
+    <div
+      class="absolute bottom-4 left-4 h-2 w-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-600 opacity-60"
+    >
+    </div>
+  </div>
 </div>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  /* Ensure smooth animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in {
+      animation: none;
+    }
+
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

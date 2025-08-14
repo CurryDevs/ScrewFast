@@ -5,8 +5,8 @@ main:
   id: 1
   content: |
     Découvrez le SF-TB T845 – votre solution de prédilection pour la fixation de précision dans les machines et équipements. Cet ensemble complet de vis à machine est méticuleusement conçu pour répondre aux exigences strictes des applications industrielles, garantissant une fixation sécurisée et fiable.
-  imgCard: "@/images/product-image-1.avif"
-  imgMain: "@/images/product-image-main-1.avif"
+  imgCard: "@/images/hero-image.png"
+  imgMain: "@/images/hero-image.png"
   imgAlt: "Maquettes de boîtes de vis à machine"
 tabs:
   - id: "tabs-with-card-item-1"

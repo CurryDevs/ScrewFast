@@ -34,119 +34,451 @@ interface PricingSectionProps {
 ---
 
 <section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  class="relative mx-auto max-w-[85rem] overflow-hidden px-4 py-16 sm:px-6 lg:px-8 lg:py-20 2xl:max-w-full"
 >
+  <!-- Background Elements -->
+  <div class="absolute inset-0 -z-10">
+    <!-- Animated gradient background -->
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-red-50/20 via-purple-50/10 to-blue-50/20 dark:from-red-950/10 dark:via-purple-950/5 dark:to-blue-950/10"
+    >
+    </div>
+
+    <!-- Floating geometric shapes -->
+    <div
+      class="animate-float absolute top-20 left-10 h-24 w-24 rounded-full bg-gradient-to-br from-red-200/30 to-purple-200/30 blur-xl dark:from-red-800/20 dark:to-purple-800/20"
+    >
+    </div>
+    <div
+      class="animate-float-delayed absolute right-10 bottom-20 h-32 w-32 rounded-full bg-gradient-to-br from-purple-200/30 to-blue-200/30 blur-xl dark:from-purple-800/20 dark:to-blue-800/20"
+    >
+    </div>
+
+    <!-- Grid pattern -->
+    <div
+      class="absolute inset-0 bg-[linear-gradient(rgba(239,68,68,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.02)_1px,transparent_1px)] bg-[size:60px_60px] dark:bg-[linear-gradient(rgba(239,68,68,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.01)_1px,transparent_1px)]"
+    >
+    </div>
+  </div>
+
   <!-- Section heading and sub-heading -->
-  <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
+  <div
+    class="animate-fade-in-up mx-auto mb-16 max-w-3xl text-center lg:mb-20"
+    style="animation-delay: 0.1s"
+  >
+    <!-- Badge -->
+    <div
+      class="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-red-100 to-purple-100 px-4 py-2 text-sm font-semibold text-red-800 dark:from-red-900/30 dark:to-purple-900/30 dark:text-red-300"
+    >
+      <svg
+        class="h-4 w-4 animate-pulse"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"
+        ></path>
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
+          clip-rule="evenodd"></path>
+      </svg>
+      Transparent Pricing
+    </div>
+
     <h2
-      class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
+      class="text-3xl font-bold tracking-tight text-balance text-neutral-800 md:text-5xl md:leading-tight lg:text-6xl dark:text-neutral-200"
     >
       {pricing.title}
     </h2>
-    <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
+    <p class="mt-4 text-lg text-neutral-600 md:text-xl dark:text-neutral-400">
       {pricing.subTitle}
     </p>
+
+    <!-- Pricing toggle (for future monthly/yearly toggle) -->
+    <div class="mt-8 flex items-center justify-center gap-4">
+      <span class="text-sm text-neutral-600 dark:text-neutral-400">Monthly</span
+      >
+      <div class="relative">
+        <div
+          class="h-6 w-11 rounded-full bg-gradient-to-r from-red-500 to-purple-600 p-1"
+        >
+          <div
+            class="h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-300"
+          >
+          </div>
+        </div>
+      </div>
+      <span class="text-sm text-neutral-600 dark:text-neutral-400">Yearly</span>
+      <span
+        class="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/30 dark:text-green-300"
+        >Save 20%</span
+      >
+    </div>
   </div>
+
   <!-- Contains two main product blocks -->
-  <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-0">
+  <div class="flex flex-wrap items-stretch justify-center gap-8 lg:gap-0">
     <!-- Starter Kit product details -->
     <div
-      class="w-full rounded-xl bg-gray-800 p-6 sm:w-1/2 sm:rounded-r-none sm:p-8 lg:w-1/3"
+      class="animate-fade-in-up group relative w-full max-w-sm lg:w-1/2 lg:max-w-none"
+      style="animation-delay: 0.2s"
     >
-      <div class="mb-4">
-        <h3 class="text-2xl font-bold text-neutral-100 sm:text-3xl">
-          {pricing.starterKit.name}
-        </h3>
-        <p class="text-indigo-300">{pricing.starterKit.description}</p>
-      </div>
-
-      <div class="mb-4">
-        <span class="text-4xl font-bold text-neutral-200"
-          >{pricing.starterKit.price}</span
-        >
-        <span class="text-lg font-bold text-neutral-300"
-          >{pricing.starterKit.cents}</span
-        >
-        <span class="ms-3 text-sm text-indigo-200"
-          >{pricing.starterKit.billingFrequency}</span
-        >
-      </div>
-      <!-- Features list - automatically created by mapping over `features` array -->
-      <ul class="mb-6 space-y-2 text-neutral-300">
-        {
-          pricing.starterKit.features.map((feature: string) => (
-            <li class="flex items-center gap-1.5">
-              <Icon name="checkCircle" />
-
-              <span>{feature}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <!-- CTA for purchasing the product -->
-      <a
-        href={pricing.starterKit.purchaseLink}
-        class="block rounded-lg bg-gray-500 px-8 py-3 text-center text-sm font-bold text-gray-100 outline-hidden ring-indigo-300 transition duration-100 hover:bg-gray-600 focus-visible:ring-3 active:text-gray-300 md:text-base"
-        >{pricing.starterKit.purchaseBtnTitle}</a
-      >
-    </div>
-    <!-- Professional Toolbox product details -->
-    <div
-      class="w-full rounded-xl bg-linear-to-tr from-[#FF512F] to-[#F09819] p-6 shadow-xl sm:w-1/2 sm:p-8"
-    >
+      <!-- Background glow -->
       <div
-        class="mb-4 flex flex-col items-start justify-between gap-4 lg:flex-row"
+        class="absolute -inset-4 rounded-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 blur-xl transition-all duration-700 group-hover:opacity-100"
       >
-        <div>
-          <h3 class="text-2xl font-bold text-neutral-100 sm:text-3xl">
-            {pricing.professionalToolbox.name}
+      </div>
+
+      <div
+        class="group-hover:shadow-3xl relative h-full rounded-2xl bg-gradient-to-br from-white via-slate-50 to-slate-100 p-8 shadow-2xl transition-all duration-500 group-hover:scale-105 lg:rounded-r-none dark:from-slate-700 dark:via-slate-600 dark:to-slate-700"
+      >
+        <!-- Card header -->
+        <div class="mb-8">
+          <div class="mb-2 flex items-center gap-2">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg"
+            >
+              <svg
+                class="h-5 w-5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <span
+              class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800 shadow-sm dark:bg-blue-900/50 dark:text-blue-200"
+              >Popular</span
+            >
+          </div>
+          <h3
+            class="text-2xl font-bold text-slate-800 sm:text-3xl dark:text-white"
+          >
+            {pricing.starterKit.name}
           </h3>
-          <p class="text-orange-200">{pricing.professionalToolbox.description}</p>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">
+            {pricing.starterKit.description}
+          </p>
         </div>
 
-        <span
-          class="order-first inline-block rounded-full bg-orange-200/60 bg-opacity-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-center text-orange-600 lg:order-none"
-          >{pricing.badge}</span
-        >
-      </div>
+        <!-- Pricing -->
+        <div class="mb-8">
+          <div class="flex items-baseline gap-2">
+            <span class="text-5xl font-bold text-slate-800 dark:text-white"
+              >{pricing.starterKit.price}</span
+            >
+            <span class="text-xl font-bold text-slate-600 dark:text-slate-300"
+              >{pricing.starterKit.cents}</span
+            >
+          </div>
+          <span class="text-sm text-slate-500 dark:text-slate-400"
+            >{pricing.starterKit.billingFrequency}</span
+          >
+        </div>
 
-      <div class="mb-4">
-        <span class="text-6xl font-bold text-neutral-100"
-          >{pricing.professionalToolbox.price}</span
-        >
-        <span class="text-lg font-bold text-orange-100"
-          >{pricing.professionalToolbox.cents}</span
-        >
-        <span class="ms-3 text-orange-200"
-          >{pricing.professionalToolbox.billingFrequency}</span
-        >
-      </div>
-      <!-- Features list - automatically created by mapping over `features` array -->
-      <ul class="mb-6 space-y-2 text-orange-100">
-        {
-          pricing.professionalToolbox.features.map((feature: string) => (
-            <li class="flex items-center gap-1.5">
-              <Icon name="checkCircle" />
+        <!-- Features list -->
+        <ul class="mb-8 space-y-4 text-slate-700 dark:text-slate-200">
+          {
+            pricing.starterKit.features.map(
+              (feature: string, index: number) => (
+                <li
+                  class="animate-fade-in-up flex items-center gap-3"
+                  style={`animation-delay: ${0.3 + index * 0.1}s`}
+                >
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-600 shadow-sm">
+                    <Icon name="checkCircle" class="h-4 w-4 text-white" />
+                  </div>
+                  <span>{feature}</span>
+                </li>
+              ),
+            )
+          }
+        </ul>
 
-              <span>{feature}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <!-- CTA for purchasing the product -->
-      <a
-        href={pricing.professionalToolbox.purchaseLink}
-        class="block rounded-lg bg-orange-200/40 bg-opacity-50 px-8 py-3 text-center text-sm font-bold text-neutral-100 outline-hidden ring-orange-300 transition duration-300 hover:bg-orange-300 focus-visible:ring-3 active:bg-orange-400 md:text-base"
-        >{pricing.professionalToolbox.purchaseBtnTitle}</a
+        <!-- CTA Button -->
+        <a
+          href={pricing.starterKit.purchaseLink}
+          class="block w-full rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-center text-sm font-bold text-white shadow-lg ring-blue-300 outline-hidden transition-all duration-300 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl focus-visible:ring-3 md:text-base"
+          >{pricing.starterKit.purchaseBtnTitle}</a
+        >
+
+        <!-- Decorative elements -->
+        <div
+          class="absolute top-4 right-4 h-3 w-3 rounded-full bg-blue-400 opacity-60"
+        >
+        </div>
+        <div
+          class="absolute bottom-4 left-4 h-2 w-2 rounded-full bg-purple-400 opacity-60"
+        >
+        </div>
+
+        <!-- Subtle border for definition -->
+        <div
+          class="absolute inset-0 rounded-2xl border border-slate-200/50 lg:rounded-r-none dark:border-slate-600/50"
+        >
+        </div>
+      </div>
+    </div>
+
+    <!-- Professional Toolbox product details -->
+    <div
+      class="animate-fade-in-up group relative w-full max-w-sm lg:w-1/2 lg:max-w-none"
+      style="animation-delay: 0.3s"
+    >
+      <!-- Background glow -->
+      <div
+        class="absolute -inset-4 rounded-2xl bg-gradient-to-r from-red-500/30 to-purple-500/30 opacity-75 blur-xl transition-all duration-700 group-hover:opacity-100"
       >
+      </div>
+
+      <div
+        class="group-hover:shadow-3xl relative h-full rounded-2xl bg-gradient-to-br from-red-500 via-red-600 to-purple-600 p-8 shadow-2xl transition-all duration-500 group-hover:scale-105"
+      >
+        <!-- Popular badge -->
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+          <span
+            class="inline-block rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 px-4 py-2 text-xs font-bold tracking-wider text-yellow-900 uppercase shadow-lg"
+            >{pricing.badge}</span
+          >
+        </div>
+
+        <!-- Card header -->
+        <div class="mb-8 pt-4">
+          <div class="mb-2 flex items-center gap-2">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm"
+            >
+              <svg
+                class="h-5 w-5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                ></path>
+              </svg>
+            </div>
+            <span
+              class="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm"
+              >Recommended</span
+            >
+          </div>
+          <h3 class="text-2xl font-bold text-white sm:text-3xl">
+            {pricing.professionalToolbox.name}
+          </h3>
+          <p class="mt-2 text-red-100">
+            {pricing.professionalToolbox.description}
+          </p>
+        </div>
+
+        <!-- Pricing -->
+        <div class="mb-8">
+          <div class="flex items-baseline gap-2">
+            <span class="text-6xl font-bold text-white"
+              >{pricing.professionalToolbox.price}</span
+            >
+            <span class="text-xl font-bold text-red-100"
+              >{pricing.professionalToolbox.cents}</span
+            >
+          </div>
+          <span class="text-sm text-red-100"
+            >{pricing.professionalToolbox.billingFrequency}</span
+          >
+        </div>
+
+        <!-- Features list -->
+        <ul class="mb-8 space-y-4 text-red-50">
+          {
+            pricing.professionalToolbox.features.map(
+              (feature: string, index: number) => (
+                <li
+                  class="animate-fade-in-up flex items-center gap-3"
+                  style={`animation-delay: ${0.4 + index * 0.1}s`}
+                >
+                  <div class="flex h-6 w-6 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                    <Icon name="checkCircle" class="h-4 w-4 text-white" />
+                  </div>
+                  <span>{feature}</span>
+                </li>
+              ),
+            )
+          }
+        </ul>
+
+        <!-- CTA Button -->
+        <a
+          href={pricing.professionalToolbox.purchaseLink}
+          class="block w-full rounded-xl bg-white/20 px-8 py-4 text-center text-sm font-bold text-white shadow-lg ring-white/30 outline-hidden backdrop-blur-sm transition-all duration-300 hover:bg-white/30 hover:shadow-xl focus-visible:ring-3 md:text-base"
+          >{pricing.professionalToolbox.purchaseBtnTitle}</a
+        >
+
+        <!-- Decorative elements -->
+        <div
+          class="absolute top-8 right-4 h-4 w-4 rounded-full bg-white/30 opacity-60"
+        >
+        </div>
+        <div
+          class="absolute bottom-8 left-4 h-3 w-3 rounded-full bg-white/20 opacity-60"
+        >
+        </div>
+
+        <!-- Floating particles -->
+        <div
+          class="absolute top-1/4 -right-2 h-2 w-2 animate-bounce rounded-full bg-white/40 delay-0"
+        >
+        </div>
+        <div
+          class="absolute bottom-1/4 -left-2 h-2 w-2 animate-bounce rounded-full bg-white/40 delay-500"
+        >
+        </div>
+      </div>
     </div>
   </div>
-  <!-- Call to action for Enterprise Solutions -->
-  <div class="mt-8 flex items-center justify-center gap-x-3 md:mt-12">
-    <p class="text-sm text-neutral-600 dark:text-neutral-400">
-      {pricing.thirdOption}
-    </p>
 
-    <SecondaryCTA title={pricing.btnText} url="#" />
+  <!-- Call to action for Enterprise Solutions -->
+  <div
+    class="animate-fade-in-up mt-16 text-center lg:mt-20"
+    style="animation-delay: 0.5s"
+  >
+    <!-- Enterprise card -->
+    <div
+      class="mx-auto max-w-2xl rounded-2xl bg-gradient-to-r from-slate-50 to-slate-100 p-8 shadow-lg dark:from-slate-800 dark:to-slate-700"
+    >
+      <div class="mb-4 flex items-center justify-center">
+        <div
+          class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-red-500 to-purple-600"
+        >
+          <svg
+            class="h-6 w-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <h3 class="mb-2 text-xl font-bold text-neutral-800 dark:text-neutral-200">
+        {pricing.thirdOption}
+      </h3>
+      <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+        Need a custom solution? We'll work with you to create the perfect
+        package for your organization.
+      </p>
+      <SecondaryCTA title={pricing.btnText} url="#" />
+    </div>
+
+    <!-- Trust indicators -->
+    <div
+      class="mt-12 flex flex-wrap items-center justify-center gap-8 opacity-60"
+    >
+      <div
+        class="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400"
+      >
+        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            fill-rule="evenodd"
+            d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"></path>
+        </svg>
+        30-day money back guarantee
+      </div>
+      <div
+        class="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400"
+      >
+        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+            clip-rule="evenodd"></path>
+        </svg>
+        Cancel anytime
+      </div>
+      <div
+        class="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400"
+      >
+        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+          ></path>
+        </svg>
+        24/7 support
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(-180deg);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 10s ease-in-out infinite;
+  }
+
+  /* Ensure smooth animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-float,
+    .animate-float-delayed,
+    .animate-bounce {
+      animation: none;
+    }
+
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

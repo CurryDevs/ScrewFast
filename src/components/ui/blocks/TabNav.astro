@@ -11,9 +11,9 @@ interface Props {
   content?: string;
   first?: boolean;
 }
-// Define button classes
+// Define button classes with enhanced styling
 const BUTTON_CLASS =
-  "dark:hover:bg-neutral-700 rounded-xl p-4 text-start outline-hidden ring-zinc-500 transition duration-300 hover:bg-neutral-200 focus-visible:ring-3 hs-tab-active:bg-neutral-50 hs-tab-active:shadow-md hs-tab-active:hover:border-transparent dark:ring-zinc-200 dark:focus:outline-hidden  dark:hs-tab-active:bg-neutral-700/60 md:p-5";
+  "group relative rounded-2xl p-5 text-start outline-hidden ring-zinc-500 transition-all duration-500 hover:bg-gradient-to-r hover:from-white/80 hover:to-white/60 hover:shadow-lg hover:backdrop-blur-sm focus-visible:ring-3 hs-tab-active:bg-gradient-to-r hs-tab-active:from-white/90 hs-tab-active:to-white/70 hs-tab-active:shadow-xl hs-tab-active:backdrop-blur-sm dark:ring-zinc-200 dark:hover:from-neutral-800/80 dark:hover:to-neutral-800/60 dark:focus:outline-hidden dark:hs-tab-active:from-neutral-800/90 dark:hs-tab-active:to-neutral-800/70 md:p-6";
 
 /*
 first: This property should be set to true for the initial TabNav component in your list
@@ -36,21 +36,45 @@ Example:
   aria-controls={aria}
   role="tab"
 >
+  <!-- Active indicator line -->
+  <div
+    class="hs-tab-active:h-12 absolute top-1/2 left-0 h-0 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-red-500 to-purple-600 transition-all duration-500"
+  >
+  </div>
+
   <!-- Slot for additional content -->
-  <span class="flex">
-    <slot />
+  <span class="flex items-start">
+    <!-- Icon container with enhanced styling -->
+    <div
+      class="hs-tab-active:from-red-500 hs-tab-active:to-purple-600 hs-tab-active:text-white hs-tab-active:shadow-lg dark:hs-tab-active:from-red-500 dark:hs-tab-active:to-purple-600 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-neutral-100 to-neutral-200 transition-all duration-500 group-hover:from-red-100 group-hover:to-purple-100 dark:from-neutral-700 dark:to-neutral-600 dark:group-hover:from-red-900/50 dark:group-hover:to-purple-900/50"
+    >
+      <slot />
+    </div>
+
     <!-- Container for the heading and content of the tab -->
-    <span class="ms-6 grow">
+    <span class="ms-4 grow">
       <!-- Heading of the tab, changes color when active -->
       <span
-        class="block text-lg font-bold text-neutral-800 hs-tab-active:text-orange-400 dark:text-neutral-200 dark:hs-tab-active:text-orange-300"
+        class="hs-tab-active:text-red-600 dark:hs-tab-active:text-red-400 block text-lg font-bold text-neutral-800 transition-colors duration-300 dark:text-neutral-200"
         >{heading}</span
       >
       <!-- Content of the tab, changes color when active -->
       <span
-        class="mt-1 block text-neutral-500 hs-tab-active:text-neutral-600 dark:text-neutral-400 dark:hs-tab-active:text-neutral-200"
+        class="hs-tab-active:text-neutral-700 dark:hs-tab-active:text-neutral-300 mt-2 block text-sm leading-relaxed text-neutral-500 transition-colors duration-300 dark:text-neutral-400"
         >{content}</span
       >
+
+      <!-- Progress bar that appears on active -->
+      <div
+        class="hs-tab-active:w-16 mt-3 h-1 w-0 rounded-full bg-gradient-to-r from-red-500 to-purple-600 transition-all duration-500"
+      >
+      </div>
     </span>
   </span>
+
+  <!-- Hover glow effect -->
+  <div
+    class="hs-tab-active:from-red-500/10 hs-tab-active:to-purple-500/10 hs-tab-active:opacity-100 absolute inset-0 rounded-2xl bg-gradient-to-r from-red-500/0 to-purple-500/0 opacity-0 transition-all duration-500 group-hover:from-red-500/5 group-hover:to-purple-500/5 group-hover:opacity-100"
+  >
+  </div>
 </button>

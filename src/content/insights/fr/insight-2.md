@@ -1,6 +1,6 @@
 ---
 title: "L'importance de la collaboration"
-description: "Découvrez comment la collaboration est au cœur de l'approche de construction de ScrewFast, favorisant une communication efficace et un travail d'équipe pour atteindre des résultats exceptionnels."
+description: "Découvrez comment la collaboration est au cœur de l'approche de construction de Torque Craft, favorisant une communication efficace et un travail d'équipe pour atteindre des résultats exceptionnels."
 cardImage: "@/images/insights/insight-2.avif"
 cardImageAlt: "Vue de dessus de l'agencement des outils mécaniques"
 ---

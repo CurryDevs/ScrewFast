@@ -21,7 +21,7 @@ const formSubTitle: string = "We'll get back to you in 1-2 business days.";
   <div class="mx-auto max-w-2xl lg:max-w-5xl">
     <div class="text-center">
       <h1
-        class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
+        class="text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200"
       >
         {title}
       </h1>
@@ -79,26 +79,20 @@ const formSubTitle: string = "We'll get back to you in 1-2 business days.";
         <ContactIconBlock
           heading="Knowledgebase"
           content="Browse through all of our knowledgebase articles."
-          isLinkVisible={true}
-          linkTitle="Visit guides & tutorials"
-          linkURL="#"
-          isArrowVisible={true}
+          isLinkVisible={false}
           ><Icon name="question" />
         </ContactIconBlock>
 
         <ContactIconBlock
           heading="FAQ"
           content="Explore our FAQ for quick, clear answers to common queries."
-          isLinkVisible={true}
-          linkTitle="Visit FAQ"
-          linkURL="#"
-          isArrowVisible={true}
+          isLinkVisible={false}
           ><Icon name="chatBubble" />
         </ContactIconBlock>
 
         <ContactIconBlock
           heading="Visit our office"
-          content="UK ScrewFast"
+          content="UK Torque Craft"
           isAddressVisible={true}
           addressContent="72 Union Terrace, E10 4PE London"
           ><Icon name="mapPin" />
@@ -107,9 +101,8 @@ const formSubTitle: string = "We'll get back to you in 1-2 business days.";
         <ContactIconBlock
           heading="Contact us by email"
           content="Prefer the written word? Drop us an email at"
-          isLinkVisible={true}
-          linkTitle="support@screwfast.uk"
-          linkURL="#"
+          isLinkVisible={false}
+          linkTitle="support@torquecraft.uk"
           ><Icon name="envelopeOpen" />
         </ContactIconBlock>
       </div>

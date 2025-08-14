@@ -15,7 +15,7 @@ import { SITE } from "@data/constants";
 // Update getStaticPaths for French posts
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blog", ({ id }) =>
-    id.startsWith("fr/")
+    id.startsWith("fr/"),
   );
   return blogPosts.map((post) => {
     const idWithoutLang = post.id.replace(/^fr\//, ""); // Remove the "fr/" prefix
@@ -31,10 +31,10 @@ const { post } = Astro.props;
 // Fetch related posts
 const blogPosts: CollectionEntry<"blog">[] = await getCollection(
   "blog",
-  ({ id }) => id.startsWith("fr/")
+  ({ id }) => id.startsWith("fr/"),
 );
 const relatedPosts: CollectionEntry<"blog">[] = blogPosts.filter(
-  (blogEntry) => blogEntry.id !== post.id
+  (blogEntry) => blogEntry.id !== post.id,
 );
 
 const pageTitle: string = `${post.data.title} | ${SITE.title}`;
@@ -64,12 +64,12 @@ const ogTitle = `${post.data.title} | Blog | ${SITE.title}`;
       name: SITE.title,
       logo: {
         "@type": "ImageObject",
-        url: "https://screwfast.uk/favicon.ico",
+        url: "https://torquecraft.uk/favicon.ico",
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://screwfast.uk/fr/blog/${post.id.replace(/^fr\//, "")}`,
+      "@id": `https://torquecraft.uk/fr/blog/${post.id.replace(/^fr\//, "")}`,
     },
     inLanguage: "fr",
   }}
@@ -136,7 +136,7 @@ const ogTitle = `${post.data.title} | Blog | ${SITE.title}`;
               <p class="text-lg text-pretty text-neutral-700 dark:text-neutral-300">
                 {content}
               </p>
-            )
+            ),
           )
         }
       </div>
