@@ -140,21 +140,29 @@ const { title, subTitle, src, alt, features } = Astro.props;
   <div class="animate-fade-in-up mt-16 lg:mt-24" style="animation-delay: 0.8s">
     <div class="rounded-2xl bg-gradient-to-r from-red-500/10 via-purple-500/10 to-blue-500/10 p-8 backdrop-blur-sm dark:from-red-900/20 dark:via-purple-900/20 dark:to-blue-900/20">
       <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
-        <div class="text-center">
-          <div class="text-2xl font-bold text-red-600 dark:text-red-400">98%</div>
-          <div class="text-sm text-neutral-600 dark:text-neutral-400">Success Rate</div>
+        <div class="text-center group">
+          <div class="text-3xl font-bold text-red-500 dark:text-red-400 transition-all duration-300 group-hover:scale-110">
+            <span class="counter-number-features" data-target="98" data-suffix="%">0%</span>
+          </div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Success Rate</div>
         </div>
-        <div class="text-center">
-          <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">24/7</div>
-          <div class="text-sm text-neutral-600 dark:text-neutral-400">Support</div>
+        <div class="text-center group">
+          <div class="text-3xl font-bold text-red-500 dark:text-red-400 transition-all duration-300 group-hover:scale-110">
+            24/7
+          </div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Support</div>
         </div>
-        <div class="text-center">
-          <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">1000+</div>
-          <div class="text-sm text-neutral-600 dark:text-neutral-400">Projects</div>
+        <div class="text-center group">
+          <div class="text-3xl font-bold text-red-500 dark:text-red-400 transition-all duration-300 group-hover:scale-110">
+            <span class="counter-number-features" data-target="1000" data-suffix="+">0+</span>
+          </div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Projects</div>
         </div>
-        <div class="text-center">
-          <div class="text-2xl font-bold text-red-600 dark:text-red-400">5★</div>
-          <div class="text-sm text-neutral-600 dark:text-neutral-400">Rating</div>
+        <div class="text-center group">
+          <div class="text-3xl font-bold text-red-500 dark:text-red-400 transition-all duration-300 group-hover:scale-110">
+            <span class="counter-number-features" data-target="5" data-suffix="★">0★</span>
+          </div>
+          <div class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Rating</div>
         </div>
       </div>
     </div>
@@ -217,3 +225,71 @@ const { title, subTitle, src, alt, features } = Astro.props;
     }
   }
 </style>
+
+<script>
+  // Counter animation function for features stats
+  function animateCounterFeatures(element: HTMLElement) {
+    const target = parseFloat(element.dataset.target || '0');
+    const suffix = element.dataset.suffix || '';
+    const duration = 2000; // 2 seconds
+    const startTime = performance.now();
+    
+    function updateCounter(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = target * easeOutQuart;
+      
+      // Format number with commas if needed
+      let displayValue: string;
+      if (target >= 1000) {
+        displayValue = Math.floor(currentValue).toLocaleString();
+      } else if (target % 1 !== 0) {
+        displayValue = currentValue.toFixed(1);
+      } else {
+        displayValue = Math.floor(currentValue).toString();
+      }
+      
+      element.textContent = displayValue + suffix;
+      
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
+    }
+    
+    requestAnimationFrame(updateCounter);
+  }
+
+  // Intersection Observer for features stats
+  const observerOptionsFeatures = {
+    threshold: 0.5,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observerFeatures = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counterElement = entry.target as HTMLElement;
+        // Add staggered delay based on element position
+        const delay = parseInt(counterElement.dataset.index || '0') * 200;
+        
+        setTimeout(() => {
+          animateCounterFeatures(counterElement);
+        }, delay + 300); // Extra delay for dramatic effect
+        
+        observerFeatures.unobserve(counterElement);
+      }
+    });
+  }, observerOptionsFeatures);
+
+  // Start observing when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const countersFeatures = document.querySelectorAll('.counter-number-features');
+    countersFeatures.forEach((counter, index) => {
+      (counter as HTMLElement).dataset.index = index.toString();
+      observerFeatures.observe(counter);
+    });
+  });
+</script>
