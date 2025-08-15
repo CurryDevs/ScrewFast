@@ -6,12 +6,96 @@ interface Props {
   title: string;
   subTitle: string;
 }
+
+// Extract numeric value and suffix from title string
+const extractNumber = (countStr: string) => {
+  const match = countStr.match(/^([\d,]+\.?\d*)(.*)/);
+  if (match) {
+    const numStr = match[1].replace(/,/g, "");
+    const suffix = match[2];
+    return { number: parseFloat(numStr), suffix };
+  }
+  return { number: 0, suffix: countStr };
+};
+
+const { number: targetNumber, suffix } = extractNumber(title);
 ---
 
 <!-- Container for the title and subtitle -->
 <div class="lg:pe-6 xl:pe-12">
-  <p class="text-6xl font-bold leading-10 text-orange-400 dark:text-orange-300">
-    {title}
+  <p class="text-6xl leading-10 font-bold text-orange-400 dark:text-orange-300">
+    <span
+      class="counter-number-big"
+      data-target={targetNumber}
+      data-suffix={suffix}
+    >
+      0{suffix}
+    </span>
   </p>
-  <p class="mt-2 text-neutral-600 dark:text-neutral-400 sm:mt-3">{subTitle}</p>
+  <p class="mt-2 text-neutral-600 sm:mt-3 dark:text-neutral-400">{subTitle}</p>
 </div>
+
+<script>
+  // Counter animation function for big stats
+  function animateCounterBig(element: HTMLElement) {
+    const target = parseFloat(element.dataset.target || "0");
+    const suffix = element.dataset.suffix || "";
+    const duration = 2500; // 2.5 seconds for big numbers
+    const startTime = performance.now();
+
+    function updateCounter(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = target * easeOutQuart;
+
+      // Format number with commas if needed
+      let displayValue: string;
+      if (target >= 1000) {
+        displayValue = Math.floor(currentValue).toLocaleString();
+      } else if (target % 1 !== 0) {
+        displayValue = currentValue.toFixed(1);
+      } else {
+        displayValue = Math.floor(currentValue).toString();
+      }
+
+      element.textContent = displayValue + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
+    }
+
+    requestAnimationFrame(updateCounter);
+  }
+
+  // Intersection Observer for big stats
+  const observerOptionsBig = {
+    threshold: 0.3,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observerBig = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const counterElement = entry.target as HTMLElement;
+
+        setTimeout(() => {
+          animateCounterBig(counterElement);
+        }, 300); // Small delay for big stat
+
+        observerBig.unobserve(counterElement);
+      }
+    });
+  }, observerOptionsBig);
+
+  // Start observing when DOM is loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    const countersBig = document.querySelectorAll(".counter-number-big");
+    countersBig.forEach((counter) => {
+      observerBig.observe(counter);
+    });
+  });
+</script>

@@ -2,12 +2,7 @@
 import TestimonialItem from "./TestimonialItem.astro";
 import StatsGrid from "../../ui/blocks/StatsGrid.astro";
 
-const {
-  title,
-  subTitle,
-  testimonials,
-  statistics
-} = Astro.props;
+const { title, subTitle, testimonials, statistics } = Astro.props;
 
 interface Props {
   title: string;
@@ -29,54 +24,71 @@ type StatProps = {
 };
 ---
 
-<section class="relative mx-auto max-w-[90rem] px-4 py-16 sm:px-6 lg:px-12 2xl:max-w-screen-xl">
+<section
+  class="relative mx-auto max-w-[90rem] px-4 py-16 sm:px-6 lg:px-12 2xl:max-w-screen-xl"
+>
   <!-- Blurred background elements for style -->
   <div class="pointer-events-none absolute inset-0 z-0">
-    <div class="absolute left-[-100px] top-[50%] h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-yellow-300/10 blur-[100px] dark:bg-purple-600/10"></div>
-    <div class="absolute right-[-100px] top-[20%] h-[300px] w-[300px] rounded-full bg-sky-400/10 blur-[80px] dark:bg-cyan-500/10"></div>
+    <div
+      class="absolute top-[50%] left-[-100px] h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-yellow-300/10 blur-[100px] dark:bg-purple-600/10"
+    >
+    </div>
+    <div
+      class="absolute top-[20%] right-[-100px] h-[300px] w-[300px] rounded-full bg-sky-400/10 blur-[80px] dark:bg-cyan-500/10"
+    >
+    </div>
   </div>
 
   <!-- Content -->
   <div class="relative z-10 grid gap-16 lg:grid-cols-12 lg:items-center">
     <!-- Left: Title + Testimonials -->
-    <div class="lg:col-span-5 space-y-6">
+    <div class="space-y-6 lg:col-span-5">
       <div class="mb-6">
-        <h2 class="text-4xl font-bold tracking-tight text-neutral-800 dark:text-white">
+        <h2
+          class="text-4xl font-bold tracking-tight text-neutral-800 dark:text-white"
+        >
           {title}
         </h2>
-        {subTitle &&
-          <p class="mt-2 text-lg text-neutral-600 dark:text-neutral-400">{subTitle}</p>
+        {
+          subTitle && (
+            <p class="mt-2 text-lg text-neutral-600 dark:text-neutral-400">
+              {subTitle}
+            </p>
+          )
         }
       </div>
 
       <!-- Testimonials -->
-      <div class="space-y-6 animate-fade-in-up">
-        {testimonials &&
-          testimonials.map((testimonial) => (
-            <TestimonialItem
-              content={testimonial.content}
-              author={testimonial.author}
-              role={testimonial.role}
-              avatarSrc={testimonial.avatarSrc}
-            />
-          ))
+      <div class="animate-fade-in-up space-y-6">
+        {
+          testimonials &&
+            testimonials.map((testimonial) => (
+              <TestimonialItem
+                content={testimonial.content}
+                author={testimonial.author}
+                role={testimonial.role}
+                avatarSrc={testimonial.avatarSrc}
+              />
+            ))
         }
       </div>
     </div>
 
     <!-- Right: Stats Grid -->
-    {statistics &&
-      <div class="lg:col-span-7 animate-fade-in-left">
-        <ul class="grid grid-cols-2 gap-6 rounded-xl border border-neutral-200/30 bg-white/40 p-6 shadow-xl backdrop-blur-md dark:border-neutral-700/50 dark:bg-neutral-900/50 sm:grid-cols-3 md:gap-10">
-          {statistics.map((stat, index) => (
-            <StatsGrid
-              count={stat.count}
-              description={stat.description}
-              index={index}
-            />
-          ))}
-        </ul>
-      </div>
+    {
+      statistics && (
+        <div class="animate-fade-in-left lg:col-span-7">
+          <ul class="grid grid-cols-1 gap-8 rounded-xl border border-neutral-200/30 bg-white/40 p-6 shadow-xl backdrop-blur-md sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 dark:border-neutral-700/50 dark:bg-neutral-900/50">
+            {statistics.map((stat, index) => (
+              <StatsGrid
+                count={stat.count}
+                description={stat.description}
+                index={index}
+              />
+            ))}
+          </ul>
+        </div>
+      )
     }
   </div>
 </section>

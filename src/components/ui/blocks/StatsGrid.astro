@@ -8,16 +8,110 @@ interface Props {
   description: string;
   index: number;
 }
+
+// Extract numeric value and suffix from count string
+const extractNumber = (countStr: string) => {
+  const match = countStr.match(/^([\d,]+\.?\d*)(.*)/);
+  if (match) {
+    const numStr = match[1].replace(/,/g, "");
+    const suffix = match[2];
+    return { number: parseFloat(numStr), suffix };
+  }
+  return { number: 0, suffix: countStr };
+};
+
+const { number: targetNumber, suffix } = extractNumber(count);
 ---
 
-<li class="-m-0.5 flex flex-col p-4 sm:p-8">
+<li class="flex flex-col items-start justify-start p-4 sm:p-6">
   <div
-    class="mb-2 flex items-end gap-x-2 text-3xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-5xl"
+    class="mb-3 flex items-center gap-x-2 text-3xl font-bold text-neutral-800 sm:text-4xl lg:text-5xl dark:text-neutral-200"
   >
-    {index === 1 || index === 2 ? <Icon name="arrowUp" /> : null}
-    {count}
+    {
+      index === 1 || index === 2 ? (
+        <Icon name="arrowUp" class="h-6 w-6 text-green-500" />
+      ) : null
+    }
+    <span
+      class="counter-number"
+      data-target={targetNumber}
+      data-suffix={suffix}
+    >
+      0{suffix}
+    </span>
   </div>
-  <p class="text-sm text-neutral-600 dark:text-neutral-400 sm:text-base">
+  <p
+    class="text-sm leading-relaxed text-neutral-600 sm:text-base dark:text-neutral-400"
+  >
     {description}
   </p>
 </li>
+
+<script>
+  // Counter animation function
+  function animateCounter(element: HTMLElement) {
+    const target = parseFloat(element.dataset.target || "0");
+    const suffix = element.dataset.suffix || "";
+    const duration = 2000; // 2 seconds
+    const startTime = performance.now();
+
+    function updateCounter(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = target * easeOutQuart;
+
+      // Format number with commas if needed
+      let displayValue: string;
+      if (target >= 1000) {
+        displayValue = Math.floor(currentValue).toLocaleString();
+      } else if (target % 1 !== 0) {
+        displayValue = currentValue.toFixed(1);
+      } else {
+        displayValue = Math.floor(currentValue).toString();
+      }
+
+      element.textContent = displayValue + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
+    }
+
+    requestAnimationFrame(updateCounter);
+  }
+
+  // Intersection Observer to trigger animation when element comes into view
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const counterElement = entry.target as HTMLElement;
+        // Add a small delay for staggered effect
+        const delay = parseInt(counterElement.dataset.index || "0") * 200;
+
+        setTimeout(() => {
+          animateCounter(counterElement);
+        }, delay);
+
+        // Stop observing this element after animation starts
+        observer.unobserve(counterElement);
+      }
+    });
+  }, observerOptions);
+
+  // Start observing when DOM is loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll(".counter-number");
+    counters.forEach((counter, index) => {
+      (counter as HTMLElement).dataset.index = index.toString();
+      observer.observe(counter);
+    });
+  });
+</script>
