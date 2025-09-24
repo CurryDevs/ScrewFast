@@ -2,8 +2,6 @@
 
 A modern, responsive website template for hardware tools and construction services, built with Astro, Tailwind CSS, and featuring a stunning red-to-blue gradient design theme.
 
-![Torque Craft Hero](public/images/hero-image.png)
-
 ## ✨ Features
 
 ### 🎨 Design & UI
