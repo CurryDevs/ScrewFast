@@ -89,11 +89,4 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  server: {
-    headers: {
-      // 🔓 Allow embedding in iframes
-      "X-Frame-Options": "ALLOWALL", 
-      "Content-Security-Policy": "frame-ancestors *", 
-    },
-  },
 });
